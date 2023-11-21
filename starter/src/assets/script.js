@@ -52,7 +52,7 @@ const products = [
 
 /* Declare an empty array named cart to hold the items in the cart */
 
-const cart = [];
+let cart = [];
 
 /* Create a function named addProductToCart that takes in the product productId as an argument
   - addProductToCart should get the correct product based on the productId
@@ -135,15 +135,15 @@ function emptyCart() {
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
 
-let totalPaid = 0;
+//let totalPaid = 0;
 
 function pay(amount) {
   let remainingBalance = amount - cartTotal();
   
-  if (remainingBalance <= 0) {
-    return cartTotal() - amount;
-  } else {
+  if (remainingBalance > 0) {
     return amount - cartTotal();
+  } else {
+    return cartTotal() - amount;
   }
 }
 
