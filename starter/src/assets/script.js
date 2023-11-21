@@ -11,38 +11,38 @@ const products = [
    - image: picture of product (url string)
 */
  
-{
-  name: 'Apples',
-  price: 1.00,
-  quantity: 0,
-  productid: 1,
-  image: 'https://images.pexels.com/photos/1510392/pexels-photo-1510392.jpeg?auto=compress&cs=tinysrgb&w=1600'
-},
+  {
+    name: 'Apples',
+    price: 1.00.toFixed(2),
+    quantity: 0,
+    productId: 1,
+    image: 'https://images.pexels.com/photos/1510392/pexels-photo-1510392.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  },
 
-{
-  name: 'Peaches',
-  price: 1.50,
-  quantity: 0,
-  productid: 2,
-  image: 'https://images.pexels.com/photos/1268122/pexels-photo-1268122.jpeg?auto=compress&cs=tinysrgb&w=1600'
-},
+  {
+    name: 'Peaches',
+    price: 1.50.toFixed(2),
+    quantity: 0,
+    productId: 2,
+    image: 'https://images.pexels.com/photos/1268122/pexels-photo-1268122.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  },
 
-{
-  name: 'Pears',
-  price: 2.50, 
-  quantity: 0,
-  productid: 3,
-  image: 'https://images.pexels.com/photos/568471/pexels-photo-568471.jpeg?auto=compress&cs=tinysrgb&w=1600'
-},
+  {
+    name: 'Pears',
+    price: 2.50.toFixed(2),
+    quantity: 0,
+    productId: 3,
+    image: 'https://images.pexels.com/photos/568471/pexels-photo-568471.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  },
 
-{
-  name: 'Kiwi',
-  price: 3.00,
-  quantity: 0,
-  productid: 4,
-  image: 'https://images.pexels.com/photos/54370/pexels-photo-54370.jpeg?auto=compress&cs=tinysrgb&w=1600'
-}
-];
+  {
+    name: 'Kiwi',
+    price: 3.00.toFixed(2),
+    quantity: 0,
+    productId: 4,
+    image: 'https://images.pexels.com/photos/54370/pexels-photo-54370.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  }
+  ];
 
 /* Images provided in /images folder. All images from Unsplash.com
    - cherry.jpg by Mae Mu
@@ -60,10 +60,29 @@ const cart = [];
   - if the product is not already in the cart, add it to the cart
 */
 
+function addProductToCart(productId) {
+  let product = products.find(product => product.productId === productId);
+  product.quantity += 1;
+
+  if (!cart.some(item => item.productId === productId)) {
+    cart.push(product);
+  }
+}
+
 /* Create a function named increaseQuantity that takes in the productId as an argument
   - increaseQuantity should get the correct product based on the productId
   - increaseQuantity should then increase the product's quantity
 */
+
+function increaseQuantity(productId) {
+  const product = products.find(product => product.productId === productId);
+  ++product.quantity;
+
+  const cartProduct = cart.find(item => item.productId === productId);
+  if (cartProduct) {
+    cartProduct.quantity++;
+  }
+}
 
 /* Create a function named decreaseQuantity that takes in the productId as an argument
   - decreaseQuantity should get the correct product based on the productId
@@ -71,17 +90,42 @@ const cart = [];
   - if the function decreases the quantity to 0, the product is removed from the cart
 */
 
+function decreaseQuantity(productId) {
+  const product = products.find(product => product.productId === productId);
+  --product.quantity;
+
+  if (product.quantity === 0) {
+    removeProductFromCart(productId);
+  }
+}
 /* Create a function named removeProductFromCart that takes in the productId as an argument
   - removeProductFromCart should get the correct product based on the productId
   - removeProductFromCart should update the product quantity to 0
   - removeProductFromCart should remove the product from the cart
 */
 
+function removeProductFromCart(productId) {
+  const index = cart.findIndex(item => item.productId === productId);
+  
+  if (index !== -1) {
+    cart[index].quantity = 0;
+      cart.splice(index, 1);
+}
+}
+
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total cost of all products
   - cartTotal should return the total cost of the products in the cart
   Hint: price and quantity can be used to determine total cost
 */
+
+function cartTotal() {
+  let total = 0;
+  for (const item of cart) {
+    total += item.price * item.quantity;
+  }
+  return total.toFixed(2);
+}
 
 /* Create a function called emptyCart that empties the products from the cart */
 
@@ -101,6 +145,7 @@ const cart = [];
    npm run test
 */
 
+/*
 module.exports = {
    products,
    cart,
@@ -111,6 +156,7 @@ module.exports = {
    cartTotal,
    pay, 
    emptyCart,
-   /* Uncomment the following line if completing the currency converter bonus */
-   // currency
+   Uncomment the following line if completing the currency converter bonus
+   currency
 }
+*/
