@@ -147,7 +147,6 @@ function pay(amount) {
   }
 }
 
-
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
 
@@ -156,7 +155,6 @@ function pay(amount) {
    Run the following command in terminal to run tests
    npm run test
 */
-
 
 module.exports = {
    products,
@@ -171,4 +169,3 @@ module.exports = {
    //Uncomment the following line if completing the currency converter bonus
    //currency
 }
-
