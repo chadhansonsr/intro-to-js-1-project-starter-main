@@ -13,7 +13,7 @@ const products = [
  
   {
     name: 'Apples',
-    price: 1.00.toFixed(2),
+    price: 1,
     quantity: 0,
     productId: 1,
     image: 'https://images.pexels.com/photos/1510392/pexels-photo-1510392.jpeg?auto=compress&cs=tinysrgb&w=1600'
@@ -21,7 +21,7 @@ const products = [
 
   {
     name: 'Peaches',
-    price: 1.50.toFixed(2),
+    price: 2,
     quantity: 0,
     productId: 2,
     image: 'https://images.pexels.com/photos/1268122/pexels-photo-1268122.jpeg?auto=compress&cs=tinysrgb&w=1600'
@@ -29,7 +29,7 @@ const products = [
 
   {
     name: 'Pears',
-    price: 2.50.toFixed(2),
+    price: 3,
     quantity: 0,
     productId: 3,
     image: 'https://images.pexels.com/photos/568471/pexels-photo-568471.jpeg?auto=compress&cs=tinysrgb&w=1600'
@@ -37,7 +37,7 @@ const products = [
 
   {
     name: 'Kiwi',
-    price: 3.00.toFixed(2),
+    price: 4,
     quantity: 0,
     productId: 4,
     image: 'https://images.pexels.com/photos/54370/pexels-photo-54370.jpeg?auto=compress&cs=tinysrgb&w=1600'
@@ -75,13 +75,8 @@ function addProductToCart(productId) {
 */
 
 function increaseQuantity(productId) {
-  const product = products.find(product => product.productId === productId);
+  const product = products.find((product) => product.productId === productId);
   ++product.quantity;
-
-  const cartProduct = cart.find(item => item.productId === productId);
-  if (cartProduct) {
-    cartProduct.quantity++;
-  }
 }
 
 /* Create a function named decreaseQuantity that takes in the productId as an argument
@@ -120,11 +115,11 @@ function removeProductFromCart(productId) {
 */
 
 function cartTotal() {
-  let total = 0;
-  for (const item of cart) {
-    total += item.price * item.quantity;
+let totalPrice = 0;
+for (let x = 0; x < cart.length; x++) {
+  totalPrice += cart[x].quantity * cart[x].price;
   }
-  return total.toFixed(2);
+return totalPrice;
 }
 
 /* Create a function called emptyCart that empties the products from the cart */
@@ -143,10 +138,15 @@ function emptyCart() {
 let totalPaid = 0;
 
 function pay(amount) {
-  totalPaid += amount;
-  let remainingBalance = totalPaid - cartTotal();
-  return remainingBalance;
+  let remainingBalance = amount - cartTotal();
+  
+  if (remainingBalance <= 0) {
+    return cartTotal() - amount;
+  } else {
+    return amount - cartTotal();
+  }
 }
+
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
