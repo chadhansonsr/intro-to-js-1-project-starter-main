@@ -110,7 +110,7 @@ function removeProductFromCart(productId) {
   if (index !== -1) {
     cart[index].quantity = 0;
       cart.splice(index, 1);
-}
+  }
 }
 
 /* Create a function named cartTotal that has no parameters
@@ -129,12 +129,24 @@ function cartTotal() {
 
 /* Create a function called emptyCart that empties the products from the cart */
 
+function emptyCart() {
+  cart = [];
+}
+
 /* Create a function named pay that takes in an amount as an argument
   - amount is the money paid by customer
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
+
+let totalPaid = 0;
+
+function pay(amount) {
+  totalPaid += amount;
+  let remainingBalance = totalPaid - cartTotal();
+  return remainingBalance;
+}
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
@@ -145,7 +157,7 @@ function cartTotal() {
    npm run test
 */
 
-/*
+
 module.exports = {
    products,
    cart,
@@ -156,7 +168,7 @@ module.exports = {
    cartTotal,
    pay, 
    emptyCart,
-   Uncomment the following line if completing the currency converter bonus
-   currency
+   //Uncomment the following line if completing the currency converter bonus
+   //currency
 }
-*/
+
